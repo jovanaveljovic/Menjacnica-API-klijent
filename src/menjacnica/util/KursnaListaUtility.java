@@ -35,4 +35,18 @@ public class KursnaListaUtility {
 		}
 		return valuteJson;
 	}
+	
+	public static LinkedList<Valuta> prevediValute(JsonArray v){
+		LinkedList<Valuta> valute = new LinkedList<>();
+		for (int i = 0; i < v.size(); i++) {
+			JsonObject valutaJson = (JsonObject) v.get(i);
+			
+			Valuta valuta = new Valuta();
+			valuta.setKurs(valutaJson.get("kurs").getAsDouble());
+			valuta.setNaziv(valutaJson.get("naziv").getAsString());
+			valute.add(valuta);
+			
+		}
+		return valute;
+	}
 }
