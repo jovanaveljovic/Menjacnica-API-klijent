@@ -1,7 +1,6 @@
 package menjacnica;
 
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -9,6 +8,7 @@ import java.io.PrintWriter;
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
 
+import komunikacija.JsonRatesAPIKomunikacija;
 import menjacnica.util.KursnaListaUtility;
 
 import com.google.gson.Gson;
@@ -53,6 +53,16 @@ public class AzuriranjeKursneListe {
 		}
 	}
 	
-	
+	public void azurirajValute() throws IOException{
+		
+			LinkedList<Valuta> valute = ucitajValute();
+			String[] nazivi = new String[valute.size()];
+			for(int i = 0; i<valute.size(); i++){
+				nazivi[i]=valute.get(i).getNaziv();
+			}
+			JsonRatesAPIKomunikacija kom = new JsonRatesAPIKomunikacija();
+			upisiValute(kom.vratiIznosKurseva(nazivi), new GregorianCalendar());
+			
+	}
 	
 }
